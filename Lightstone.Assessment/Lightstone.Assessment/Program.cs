@@ -97,7 +97,7 @@
     {
         static void Main(string[] args)
         {
-            UnitTest.Proccess();
+            //UnitTest.Proccess(); uncomment if you need to use it
             var reverseWord = new ReverseWord();
             var reverseWordHandler = new ReversWordHandler(reverseWord);
 
