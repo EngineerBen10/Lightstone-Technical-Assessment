@@ -5,7 +5,7 @@
         string ReversWords(string input);
     }
 
-    public class ReversWord : IReverseWord
+    public class ReverseWord : IReverseWord
     {
         public string ReversWords(string input)
         {
@@ -29,11 +29,54 @@
 
         }
     }
+
+    public class ReversWordHandler
+    {
+        private readonly IReverseWord _reverseWord;
+
+        public ReversWordHandler(IReverseWord reverseWord)
+        {
+            _reverseWord = reverseWord;
+        }
+
+        public void Proccess()
+        {
+            Console.WriteLine("Enter the number of cases: ");
+
+            var input = Console.ReadLine();
+  
+            Dictionary<string, string> reverseDict = new Dictionary<string, string>();
+            // validate input base on requirements
+            if (!int.TryParse(input, out int number) || number < 1 || number > 25)
+            {
+                Console.WriteLine("Invalid number of test cases \n");
+                Proccess(); // excecute the process again
+            }
+
+            for (var i = 1; i <= number; i++)
+            {
+                Console.WriteLine($"Enter test cases: {i}");
+                var line = Console.ReadLine();
+                if (line == null) continue; // break if this happens
+                var result = _reverseWord.ReversWords(line);
+
+                reverseDict.Add($"Case {i}", result);
+            }
+
+            foreach (var kvp in reverseDict)
+            {
+                Console.WriteLine($"{kvp.Key}: {kvp.Value}");
+            }
+        }
+    }
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            var reverseWord = new ReverseWord();
+            var reverseWordHandler = new ReversWordHandler(reverseWord);
+
+            reverseWordHandler.Proccess();
         }
     }
 }
