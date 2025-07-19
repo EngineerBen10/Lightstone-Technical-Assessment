@@ -98,10 +98,10 @@
         static void Main(string[] args)
         {
             UnitTest.Proccess();
-            // var reverseWord = new ReverseWord();
-            // var reverseWordHandler = new ReversWordHandler(reverseWord);
+            var reverseWord = new ReverseWord();
+            var reverseWordHandler = new ReversWordHandler(reverseWord);
 
-            // reverseWordHandler.Proccess();
+            reverseWordHandler.Proccess();
         }
     }
 }
