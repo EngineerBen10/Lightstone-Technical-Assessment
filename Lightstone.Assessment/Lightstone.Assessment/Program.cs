@@ -2,12 +2,12 @@
 {
     public interface IReverseWord
     {
-        string ReversWords(string input);
+        string ReverseWords(string input);
     }
 
     public class ReverseWord : IReverseWord
     {
-        public string ReversWords(string input)
+        public string ReverseWords(string input)
         {
             if (string.IsNullOrWhiteSpace((input))) return string.Empty; // return empty string for whiteSpaces
 
@@ -58,7 +58,7 @@
                 Console.WriteLine($"Enter test cases: {i}");
                 var line = Console.ReadLine();
                 if (line == null) continue; // break if this happens
-                var result = _reverseWord.ReversWords(line);
+                var result = _reverseWord.ReverseWords(line);
 
                 reverseDict.Add($"Case {i}", result);
             }
@@ -69,14 +69,39 @@
             }
         }
     }
+
+
+    public static class UnitTest
+    {
+        public static void Proccess()
+        {
+            var reverser = new ReverseWord();
+
+            Assert(reverser.ReverseWords("Deploy microservices to Kubernetes") == "Kubernetes to microservices Deploy", "Test 1");
+            Assert(reverser.ReverseWords("Continuous integration improves quality") == "quality improves integration Continuous", "Test 2");
+            Assert(reverser.ReverseWords("Data-driven decisions require analytics") == "analytics requiredecisions Data-driven", "Test 3");
+
+            Console.WriteLine("All tests passed.\n");
+        }
+
+        private static void Assert(bool condition, string testName)
+        {
+            if (!condition)
+            {
+                Console.WriteLine($"{testName} FAILED");
+                Environment.Exit(1);
+            }
+        }
+    }
     class Program
     {
         static void Main(string[] args)
         {
-            var reverseWord = new ReverseWord();
-            var reverseWordHandler = new ReversWordHandler(reverseWord);
+            UnitTest.Proccess();
+            // var reverseWord = new ReverseWord();
+            // var reverseWordHandler = new ReversWordHandler(reverseWord);
 
-            reverseWordHandler.Proccess();
+            // reverseWordHandler.Proccess();
         }
     }
 }
